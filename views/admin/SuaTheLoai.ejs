@@ -1,0 +1,40 @@
+<%- include("../Header.ejs") %>
+
+    <!-- Page Content  -->
+
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Chỉnh sửa thông tin thể loại</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form action="/admin/theloai/suatheloai" method="POST">
+                                <input type="hidden" name="id" value="<%= data.id %>">
+                                <div class="form-group">
+                                    <label>Tên thể loại:</label>
+                                    <input name="theloai" required type="text" class="form-control"
+                                        value="<%= data.theloai %>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả:</label>
+                                    <textarea name="mota" class="form-control" rows="4"><%= data.mota %></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                <button type="reset" class="btn btn-danger">Clear</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

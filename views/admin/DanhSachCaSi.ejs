@@ -1,0 +1,81 @@
+<%- include("../Header.ejs") %>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Danh sách ca sĩ</h4>
+                            </div>
+                            <div class="iq-card-header-toolbar d-flex align-items-center">
+                                <a href="/admin/casi/themcasi" class="btn btn-primary">+ Thêm mới</a>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;">ID</th>
+                                            <th style="width: 5%;">Avatar</th>
+                                            <th style="width: 15%;">Tên</th>
+                                            <th style="width: 12%;">Ngày sinh</th>
+                                            <th style="width: 40%;">Mô tả</th>
+                                            <th style="width: 13%;">Lượt thích</th>
+                                            <th style="width: 10%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (var i=0; i < data.length; i++) { %>
+                                            <tr>
+                                                <td>
+                                                    <%=data[i].id%>
+                                                </td>
+                                                <td>
+                                                    <img src="<%=data[i].avatar%>" class="img-fluid avatar-50 rounded"
+                                                        alt="">
+                                                </td>
+                                                <td>
+                                                    <%=data[i].tencs%>
+                                                </td>
+                                                <td>
+                                                    <%= moment(data[i].ngaysinh).format('DD-MM-YYYY') %>
+                                                </td>
+                                                <td>
+                                                    <p class="mb-0">
+                                                        <%=data[i].mota%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <%=data[i].luotthich%>k <i style="color: red;"
+                                                            class="fa fa-heart"></i>
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                            title="" data-original-title="Sửa"
+                                                            href="/admin/casi/suacasi/<%=data[i].id%>"><i
+                                                                class="ri-pencil-line"></i></a>
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                            title="" data-original-title="Xóa"
+                                                            href="/admin/casi/xoacasi/<%=data[i].id%>"><i
+                                                                class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

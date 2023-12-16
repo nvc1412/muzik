@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Muzik</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/dataTables.bootstrap4.min.css">
+    <!-- Typography CSS -->
+    <link rel="stylesheet" href="/css/typography.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+
+<body>
+    <!-- loader Start -->
+    <div id="loading">
+        <div id="loading-center">
+        </div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <div class="iq-sidebar">
+            <div class="iq-sidebar-logo d-flex justify-content-between">
+                <a href="/trangchu" class="header-logo">
+                    <img src="/images/logo.png" class="img-fluid rounded-normal" alt="">
+                    <div class="logo-title">
+                        <span class="text-primary text-uppercase">Muzik</span>
+                    </div>
+                </a>
+                <div class="iq-menu-bt-sidebar">
+                    <div class="iq-menu-bt align-self-center">
+                        <div class="wrapper-menu">
+                            <div class="main-circle"><i class="las la-bars"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sidebar-scrollbar">
+                <nav class="iq-sidebar-menu">
+                    <ul id="iq-sidebar-toggle" class="iq-menu">
+
+                        <li class="<%= (currentPath === '/trangchu') ? 'active active-menu' : '' %>">
+                            <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse"
+                                aria-expanded="<%= currentPath === '/trangchu' ? 'true' : 'false' %>"><span
+                                    class="ripple rippleEffect"></span><i
+                                    class="las la-home iq-arrow-left"></i><span>Trang Chủ</span><i
+                                    class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                            <ul id="dashboard"
+                                class="iq-submenu collapse <%= (currentPath === '/trangchu') ? 'show' : '' %>"
+                                data-parent="#iq-sidebar-toggle">
+                                <li class="<%= currentPath === '/trangchu' ? 'active' : '' %>"><a href="/trangchu"><i
+                                            class="las la-house-damage"></i>Trang chủ</a>
+                                </li>
+                                <li class="<%= currentPath === '/moinhat' ? 'active' : '' %>"><a href="/moinhat"><i
+                                            class="las la-headphones"></i>Mới nhất</a></li>
+                                <li class="<%= currentPath === '/albums' ? 'active' : '' %>"><a href="/albums"><i
+                                            class="lar la-file-audio"></i>Albums</a></li>
+                            </ul>
+                        </li>
+                        <% if(tk.quyen==="Admin" ) { %>
+                            <li
+                                class="<%= (currentPath === '/admin/trangchuadmin' || currentPath === '/admin/theloai' || currentPath === '/admin/taikhoan' ||  currentPath === '/admin/casi' || currentPath === '/admin/baihat' || currentPath === '/admin/binhluan') ? 'active active-menu' : '' %>">
+                                <a href="#admin" class="iq-waves-effect" data-toggle="collapse"
+                                    aria-expanded="<%= (currentPath === '/admin/trangchuadmin' || currentPath === '/admin/theloai' || currentPath === '/admin/taikhoan' || currentPath === '/admin/casi' || currentPath === '/admin/baihat' || currentPath === '/admin/binhluan') ? 'true' : 'false' %>"><span
+                                        class="ripple rippleEffect"></span><i
+                                        class="ri-admin-line iq-arrow-left"></i><span>Admin</span><i
+                                        class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                <ul id="admin"
+                                    class="iq-submenu collapse <%= (currentPath === '/admin/trangchuadmin' || currentPath === '/admin/theloai' || currentPath === '/admin/taikhoan' || currentPath === '/admin/casi' || currentPath === '/admin/baihat' || currentPath === '/admin/binhluan') ? 'show' : '' %>"
+                                    data-parent="#iq-sidebar-toggle">
+                                    <li class="<%= currentPath === '/admin/trangchuadmin' ? 'active' : '' %>">
+                                        <a href="/admin/trangchuadmin"><i class="las la-house-damage"></i>Trang chủ
+                                            admin</a>
+                                    </li>
+                                    <li class="<%= currentPath === '/admin/theloai' ? 'active' : '' %>"><a
+                                            href="/admin/theloai"><i class="ri-function-line"></i>Thể loại</a>
+                                    </li>
+                                    <li class="<%= currentPath === '/admin/taikhoan' ? 'active' : '' %>"><a
+                                            href="/admin/taikhoan"><i class="las la-user"></i>Tài khoản</a></li>
+                                    <li class="<%= currentPath === '/admin/casi' ? 'active' : '' %>"><a
+                                            href="/admin/casi"><i class="las la-microphone-alt"></i>Ca sĩ</a></li>
+                                    <li class="<%= currentPath === '/admin/baihat' ? 'active' : '' %>"><a
+                                            href="/admin/baihat"><i class="las la-play-circle"></i>Bài hát</a>
+                                    </li>
+                                    <li class="<%= currentPath === '/admin/binhluan' ? 'active' : '' %>"><a
+                                            href="/admin/binhluan"><i class="las la-comments"></i>Bình luận</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <% } %>
+                                <li
+                                    class="<%= (currentPath === '/user/thongtincanhan' || currentPath === '/user/chinhsuathongtin' || currentPath === '/user/albumcuaban') ? 'active active-menu' : '' %>">
+                                    <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse"
+                                        aria-expanded="<%= (currentPath === '/user/thongtincanhan' || currentPath === '/user/chinhsuathongtin' || currentPath === '/user/albumcuaban') ? 'true' : 'false' %>"><span
+                                            class="ripple rippleEffect"></span><i
+                                            class="las la-user-tie iq-arrow-left"></i><span>Tài
+                                            khoản của bạn</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                                    <ul id="userinfo"
+                                        class="iq-submenu collapse <%= (currentPath === '/user/thongtincanhan' || currentPath === '/user/chinhsuathongtin' || currentPath === '/user/albumcuaban') ? 'show' : '' %>"
+                                        data-parent="#iq-sidebar-toggle" style="">
+                                        <li class="<%= currentPath === '/user/thongtincanhan' ? 'active' : '' %>"><a
+                                                href="/thongtincanhan"><i class="las la-id-card-alt"></i>Thông tin cá
+                                                nhân</a></li>
+                                        <li class="<%= currentPath === '/user/chinhsuathongtin' ? 'active' : '' %>">
+                                            <a href="/chinhsuathongtin"><i class="las la-edit"></i>Chỉnh sửa thông
+                                                tin</a>
+                                        </li>
+
+                                        <li class="<%= currentPath === '/user/albumcuaban' ? 'active' : '' %>"><a
+                                                href="/albumcuaban"><i class="las la-th-list"></i>Album của bạn</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!-- TOP Nav Bar -->
+        <div class="iq-top-navbar">
+            <div class="iq-navbar-custom">
+                <nav class="navbar navbar-expand-lg navbar-light p-0">
+                    <div class="iq-menu-bt d-flex align-items-center">
+                        <div class="wrapper-menu">
+                            <div class="main-circle"><i class="las la-bars"></i></div>
+                        </div>
+                        <div class="iq-navbar-logo d-flex justify-content-between">
+                            <a href="/trangchu" class="header-logo">
+                                <img src="/images/logo.png" class="img-fluid rounded-normal" alt="">
+                                <div class="pt-2 pl-2 logo-title">
+                                    <span class="text-primary text-uppercase">Muzik</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="list-unstyled iq-menu-top d-flex justify-content-between mb-0 p-0">
+                            <li class="active"><a href="/trangchu">Trang chủ</a></li>
+                            <li><a href="/moinhat">Mới nhất</a></li>
+                            <li><a href="/albums">Albums</a></li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto navbar-list">
+                            <li class="nav-item nav-icon">
+                                <div class="iq-search-bar">
+                                    <form action="#" class="searchbox">
+                                        <input type="text" class="text search-input" placeholder="Tìm kiếm..">
+                                        <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
+                                        <a class="search-audio" href="#"><i
+                                                class="las la-microphone text-black"></i></a>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item nav-icon search-content">
+                                <a href="#" class="search-toggle iq-waves-effect text-gray rounded"><span
+                                        class="ripple rippleEffect "></span>
+                                    <i class="ri-search-line text-black"></i>
+                                </a>
+                                <form action="#" class="search-box p-0">
+                                    <input type="text" class="text search-input" placeholder="Type here to search...">
+                                    <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
+                                    <a class="search-audio" href="#"><i class="las la-microphone text-black"></i></a>
+                                </form>
+                            </li>
+                            <li class="nav-item nav-icon">
+                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                                    <i class="las la-cog"></i>
+                                    <span class=" dots"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item nav-icon">
+                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                                    <i class="lar la-envelope"></i>
+                                    <span class="massage-icon dots badge badge-primary">1</span>
+                                </a>
+                                <div class="iq-sub-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                        <div class="iq-card-body p-0 ">
+                                            <div class="bg-primary p-3">
+                                                <h5 class="mb-0 text-white">Tất cả tin nhắn<small
+                                                        class="badge  badge-light float-right pt-1">1</small></h5>
+                                            </div>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="media align-items-center">
+                                                    <div class="">
+                                                        <img class="avatar-40 rounded" src="/images/user/01.jpg" alt="">
+                                                    </div>
+                                                    <div class="media-body ml-3">
+                                                        <h6 class="mb-0 ">Bni Emma Watson</h6>
+                                                        <small class="float-left font-size-12">5 phút trước</small>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item nav-icon">
+                                <a href="#" class="search-toggle iq-waves-effect text-black rounded">
+                                    <i class="ri-notification-line block"></i>
+                                    <span class="notice-icon dots badge badge-primary">+</span>
+                                </a>
+                                <div class="iq-sub-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                        <div class="iq-card-body p-0">
+                                            <div class="bg-primary p-3">
+                                                <h5 class="mb-0 text-white">Tất cả thông báo<small
+                                                        class="badge  badge-light float-right pt-1">1</small></h5>
+                                            </div>
+                                            <a href="#" class="iq-sub-card">
+                                                <div class="media align-items-center">
+                                                    <div class="">
+                                                        <img class="avatar-40 rounded img-fluid"
+                                                            src="/images/user/01.jpg" alt="">
+                                                    </div>
+                                                    <div class="media-body ml-3">
+                                                        <h6 class="mb-0 ">Emma Watson Barry</h6>
+                                                        <small class="float-right">bây giờ</small>
+                                                        <p class="mb-0">95 MB</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="line-height pt-3">
+                                <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
+                                    <img src="/images/user/11.png" class="img-fluid rounded-circle" alt="user">
+                                </a>
+                                <div class="iq-sub-dropdown iq-user-dropdown">
+                                    <div class="iq-card shadow-none m-0">
+                                        <div class="iq-card-body p-0 ">
+                                            <div class="bg-primary p-3">
+                                                <h5 class="mb-0 text-white line-height">Xin chào <%= tk.username %>
+                                                </h5>
+                                                <span class="text-white font-size-12">đang hoạt động</span>
+                                            </div>
+                                            <a href="/thongtincanhan" class="iq-sub-card iq-bg-primary-hover">
+                                                <div class="media align-items-center">
+                                                    <div class="rounded iq-card-icon iq-bg-primary">
+                                                        <i class="ri-file-user-line"></i>
+                                                    </div>
+                                                    <div class="media-body ml-3">
+                                                        <h6 class="mb-0 ">Hồ sơ của tôi</h6>
+                                                        <p class="mb-0 font-size-12">Xem chi tiết thông tin cá nhân.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="/chinhsuathongtin" class="iq-sub-card iq-bg-primary-hover">
+                                                <div class="media align-items-center">
+                                                    <div class="rounded iq-card-icon iq-bg-primary">
+                                                        <i class="ri-profile-line"></i>
+                                                    </div>
+                                                    <div class="media-body ml-3">
+                                                        <h6 class="mb-0 ">Chỉnh sửa hồ sơ</h6>
+                                                        <p class="mb-0 font-size-12">Sửa đổi thông tin cá nhân.</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <div class="d-inline-block w-100 text-center p-3">
+                                                <a class="bg-primary iq-sign-btn" href="/dangxuat" role="button">Đăng
+                                                    xuất<i class="ri-login-box-line ml-2"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- TOP Nav Bar END -->
+        <script>
+            let BXH_list = [];
+            let NEW_list = [];
+            let BHCS_list = [];
+            let PhoBien_list = [];
+
+        </script>

@@ -1,0 +1,97 @@
+<%- include("../Header.ejs") %>
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Chỉnh sửa bài hát</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form action="/admin/baihat/suabaihat" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="id" value="<%= data[0].id %>">
+                                <div style="text-align: center;" class="form-group">
+                                    <div class="add-img-user profile-img-edit">
+                                        <img class="profile-pic img-fluid" src="<%= data[0].poster %>"
+                                            alt="profile-pic">
+                                        <div style="text-align: center;" class="p-image">
+                                            <a href="javascript:void();" class="upload-button btn iq-bg-primary">Tải
+                                                ảnh</a>
+                                            <input name="poster" class="file-upload" type="file" accept="image/*">
+                                            <input type="hidden" name="url_poster" value="<%= data[0].poster %>">
+                                        </div>
+                                    </div>
+                                    <div class="img-extension mt-3">
+                                        <div class="d-inline-block align-items-center">
+                                            <span>Định dạng hợp lệ: </span>
+                                            <a href="javascript:void();">.jpg</a>
+                                            <a href="javascript:void();">.png</a>
+                                            <a href="javascript:void();">.jpeg</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nhac">File nhạc: <span>
+                                            <%= data[0].nhac %>
+                                        </span></label>
+                                    <input type="hidden" name="nhac" value="<%= data[0].nhac %>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tên bài hát:</label>
+                                    <input name="tenbh" type="text" class="form-control" value="<%=data[0].tenbh%>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Thể loại:</label>
+                                    <select required name="id_tl" class="form-control" id="exampleFormControlSelect1">
+
+                                        <option disabled="">Chọn thể loại</option>
+                                        <% for (var i=0; i < data[1].length; i++) { %>
+                                            <option <% if (data[1][i].id==data[0].id_tl){ %> selected <% } %>
+                                                    value="<%= data[1][i].id %>">
+                                                        <%= data[1][i].theloai %>
+                                            </option>
+                                            <% } %>
+
+                                                <!-- <option disabled="">Thể loại</option>
+                                                <option <% if (data.theloai=="Ballad" ) {%> selected <% } %> >Ballad
+                                                </option>
+                                                <option <% if (data.theloai=="Lofi" ) {%> selected <% } %> >Lofi
+                                                </option>
+                                                <option <% if (data.theloai=="Remix" ) {%> selected <% } %> >Remix
+                                                </option> -->
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ca sĩ:</label>
+                                    <select required name="id_cs" class="form-control" id="exampleFormControlSelect1">
+                                        <option disabled="">Chọn ca sĩ</option>
+                                        <% for (var i=0; i < data[2].length; i++) { %>
+                                            <option <% if (data[2][i].id==data[0].id_cs){ %> selected <% } %>
+                                                    value="<%= data[2][i].id %>">
+                                                        <%= data[2][i].tencs %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả:</label>
+                                    <textarea name="mota" class="form-control" rows="4"><%=data[0].mota%></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="this.disabled=true;this.form.submit();">Cập nhật</button>
+                                <button type="reset" class="btn btn-danger">Clear</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

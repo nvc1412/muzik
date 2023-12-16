@@ -1,0 +1,109 @@
+<%- include("../Header.ejs") %>
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Cập nhật tài khoản</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form action="/admin/taikhoan/suataikhoan" method="POST">
+
+                                <input type="hidden" name="id" value="<%= data.id %>">
+                                <div class="form-group">
+                                    <div class="add-img-user profile-img-edit">
+                                        <img class="profile-pic img-fluid" src="<%= data.avatar %>"
+                                            alt="Chưa cập nhật...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quyền:</label>
+                                    <select name="quyen" class="form-control" id="selectuserrole">
+                                        <option <% if (data.quyen=="Thành Viên" ){ %>
+                                            selected <% } %>
+                                                value="Thành Viên">Thành Viên</option>
+                                        <option <% if (data.quyen=="Admin" ){ %>
+                                            selected <% } %> value="Admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Trạng thái:</label>
+                                    <select name="trangthai" class="form-control" id="selectuserrole">
+                                        <option <% if (data.trangthai=="Hoạt Động" ){ %>
+                                            selected <% } %>
+                                                value="Hoạt Động" >Hoạt Động</option>
+                                        <option <% if (data.trangthai=="Khóa" ){ %>
+                                            selected <% } %>
+                                                value="Khóa" >Khóa</option>
+                                    </select>
+                                </div>
+                                <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Thông tin tài khoản</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="new-user-info">
+                                <!-- <form> -->
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="fname">Họ:</label>
+                                        <input disabled value="<%= data.ho %>" type="text" class="form-control"
+                                            id="fname" placeholder="Chưa cập nhật thông tin...">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="lname">Tên:</label>
+                                        <input disabled value="<%= data.ho %>" type="text" class="form-control"
+                                            id="lname" placeholder="Chưa cập nhật thông tin...">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="mobno">Số điện thoại:</label>
+                                        <input disabled value="<%= data.sdt %>" type="text" class="form-control"
+                                            id="mobno" placeholder="Chưa cập nhật thông tin...">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="email">Email:</label>
+                                        <input disabled value="<%= data.email %>" type="email" class="form-control"
+                                            id="email" placeholder="Chưa cập nhật thông tin...">
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <label>Địa chỉ:</label>
+                                        <select disabled required name="diachi" class="form-control" id="selectcountry">
+                                            <option <% if (data.diachi=="" ){ %> selected <% } %> >Chưa cập nhật thông
+                                                    tin...</option>
+                                            <% for (var i=0; i < dc.length; i++) { %>
+                                                <option <% if (dc[i]==data.diachi){ %> selected <% } %>
+                                                        value="<%= dc[i] %>">
+                                                            <%= dc[i] %>
+                                                </option>
+                                                <% } %>
+                                        </select>
+
+
+
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

@@ -1,0 +1,195 @@
+<%- include("../Header.ejs") %>
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="iq-card">
+                        <div class="iq-card-body p-0">
+                            <div class="iq-edit-list">
+                                <ul class="iq-edit-profile d-flex nav nav-pills">
+                                    <li class="col-md-6 p-0">
+                                        <a class="nav-link active" data-toggle="pill" href="#personal-information">
+                                            Thông tin cá nhân
+                                        </a>
+                                    </li>
+                                    <li class="col-md-6 p-0">
+                                        <a class="nav-link" data-toggle="pill" href="#chang-pwd">
+                                            Đổi mật khẩu
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="iq-edit-list-data">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active show" id="personal-information" role="tabpanel">
+                                <div class="iq-card">
+                                    <div class="iq-card-header d-flex justify-content-between">
+                                        <div class="iq-header-title">
+                                            <h4 class="card-title">Chỉnh sửa thông tin cá nhân</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="iq-card-body">
+                                        <form action="#">
+                                            <div style="text-align: center;" class="form-group row align-items-center">
+                                                <div class="col-md-12">
+                                                    <div class="profile-img-edit">
+                                                        <img class="profile-pic" src="images/user/11.png"
+                                                            alt="profile-pic">
+                                                        <div class="p-image">
+                                                            <i class="ri-pencil-line upload-button"></i>
+                                                            <input class="file-upload" type="file" accept="image/*" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class=" row align-items-center">
+                                                <div class="form-group col-sm-6">
+                                                    <label for="fname">Họ:</label>
+                                                    <input type="text" class="form-control" id="fname"
+                                                        placeholder="Barry">
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label for="lname">Tên:</label>
+                                                    <input type="text" class="form-control" id="lname"
+                                                        placeholder="Tech">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="mobno">Số điện thoại:</label>
+                                                    <input type="text" class="form-control" id="mobno"
+                                                        placeholder="Số điện thoại">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="email">Email:</label>
+                                                    <input type="email" class="form-control" id="email"
+                                                        placeholder="Email">
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>Địa chỉ:</label>
+                                                    <select class="form-control" id="selectcountry">
+                                                        <option>Hà Nội</option>
+                                                        <option>Hải Phòng</option>
+                                                        <option>Đà Nẵng</option>
+                                                        <option>Cần Thơ</option>
+                                                        <option>Thành phố Hồ Chí Minh</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label for="uname">User Name:</label>
+                                                    <input type="text" class="form-control" id="uname"
+                                                        placeholder="Barry@01">
+                                                </div>
+
+                                                <div class="form-group col-sm-6">
+                                                    <label class="d-block">Giới tính:</label>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadio6" name="customRadio1"
+                                                            class="custom-control-input" checked="">
+                                                        <label class="custom-control-label" for="customRadio6">
+                                                            Nam
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadio7" name="customRadio1"
+                                                            class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadio7">
+                                                            Nữ
+                                                        </label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="customRadio8" name="customRadio1"
+                                                            class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadio8">
+                                                            Khác
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label>Age:</label>
+                                                    <select class="form-control" id="exampleFormControlSelect2">
+                                                        <option>
+                                                            < 12</option>
+                                                        <option>12-18</option>
+                                                        <option selected="">19-32</option>
+                                                        <option>33-45</option>
+                                                        <option>46-62</option>
+                                                        <option> > 62</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-sm-12">
+                                                    <label>Mô tả bản thân:</label>
+                                                    <textarea style="line-height: 22px;" class="form-control"
+                                                        name="address" rows="5"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                        </textarea>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
+                                            <button type="reset" class="btn iq-bg-danger">Clear</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane fade" id="chang-pwd" role="tabpanel">
+                                <div class="iq-card">
+                                    <div class="iq-card-header d-flex justify-content-between">
+                                        <div class="iq-header-title">
+                                            <h4 class="card-title">Thay đổi mật khẩu</h4>
+                                        </div>
+                                    </div>
+                                    <% if (typeof conflictError !="undefined" && conflictError) { %>
+                                        <div class="text-danger text-center">
+                                            <%= conflictError %>
+                                        </div>
+                                        <% } %>
+                                            <div class="iq-card-body">
+                                                <form action="/chinhsuathongtin/doimatkhau" method="POST">
+                                                    <input name="username" type="hidden" value="<%=tk.username%>">
+                                                    <div class="form-group">
+                                                        <label for="cpass">Mật khẩu cũ:</label>
+                                                        <a href="javascripe:void();" class="float-right">Quên mật
+                                                            khẩu</a>
+                                                        <input name="cpass" type="text" class="form-control" id="cpass"
+                                                            <% if (typeof cpass !="undefined" && cpass) { %>
+                                                        value="<%= cpass %>"
+                                                            <% } %>
+                                                                >
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="npass">Mật khẩu mới:</label>
+                                                        <input name="npass" type="text" class="form-control" id="npass"
+                                                            <% if (typeof npass !="undefined" && npass) { %>
+                                                        value="<%= npass %>"
+                                                            <% } %>>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="vpass">Xác thực mật khẩu mới:</label>
+                                                        <input name="vpass" type="text" class="form-control" id="vpass"
+                                                            <% if (typeof vpass !="undefined" && vpass) { %>
+                                                        value="<%= vpass %>"
+                                                            <% } %>>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
+                                                    <button type="reset" class="btn iq-bg-danger">Clear</button>
+                                                </form>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+
+
+    <%- include("../Footer.ejs") %>

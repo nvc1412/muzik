@@ -1,0 +1,86 @@
+<%- include("../Header.ejs") %>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Danh sách tài khoản</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Avatar</th>
+                                            <th>Tên</th>
+                                            <th>SĐT</th>
+                                            <th>Email</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Thời gian tạo</th>
+                                            <th>Trạng thái</th>
+                                            <th>Quyền</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (var i=0; i < data.length; i++) { %>
+                                            <tr>
+                                                <td>
+                                                    <%=data[i].id%>
+                                                </td>
+                                                <td class="text-center"><img class="rounded img-fluid avatar-40"
+                                                        src="images/user/01.jpg" alt=""></td>
+                                                <td>
+                                                    <%=data[i].ten%>
+                                                </td>
+                                                <td>
+                                                    <%=data[i].sdt%>
+                                                </td>
+                                                <td>
+                                                    <%=data[i].email%>
+                                                </td>
+                                                <td>
+                                                    <%=data[i].diachi%>
+                                                </td>
+                                                <td>
+                                                    <!-- <%=data[i].thoigiantao%> -->
+                                                    <%= moment(data[i].thoigiantao).format('DD-MM-YYYY HH:mm') %>
+                                                </td>
+                                                <td style="text-align: center;"><span
+                                                        class="badge iq-bg-<%= (data[i].trangthai == 'Khóa') ? 'primary' : 'success' %>">
+                                                        <%=data[i].trangthai%>
+                                                    </span></td>
+                                                <td style="text-align: center;"><span
+                                                        class="badge iq-bg-<%= (data[i].quyen == 'Admin') ? 'primary' : 'success' %> ">
+                                                        <%=data[i].quyen%>
+                                                    </span></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center list-user-action">
+                                                        <a class="bg-primary" title="" data-original-title="Sửa"
+                                                            href="/admin/taikhoan/suataikhoan/<%=data[i].id%>"><i
+                                                                class="ri-pencil-line"></i></a>
+                                                        <a class="bg-primary" title="" data-original-title="Xóa"
+                                                            href="/admin/taikhoan/xoataikhoan/<%=data[i].id%>"><i
+                                                                class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

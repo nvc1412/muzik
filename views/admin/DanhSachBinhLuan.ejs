@@ -1,0 +1,71 @@
+<%- include("../Header.ejs") %>
+
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Danh sách bình luận</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <div class="table-responsive">
+                                <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;">ID</th>
+                                            <th style="width: 5%;">Avatar</th>
+                                            <th style="width: 15%;">Tên</th>
+                                            <th style="width: 25%;">Tên bài hát</th>
+                                            <th style="width: 30%;">Nội dung bình luận</th>
+                                            <th style="width: 15%;">Thời gian tạo</th>
+                                            <th style="width: 5%;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (var i=0; i < data.length; i++) { %>
+                                            <tr>
+                                                <td>
+                                                    <%=data[i].id%>
+                                                </td>
+                                                <td class="text-center"><img class="rounded img-fluid avatar-40"
+                                                        src="images/user/01.jpg" alt="profile"></td>
+                                                <td>
+                                                    <%= (data[i].ten !="" ) ? data[i].ten : "User" %>
+                                                </td>
+                                                <td>
+                                                    <%=data[i].tenbh%>
+                                                </td>
+                                                <td>
+                                                    <%=data[i].noidung%>
+                                                </td>
+                                                <td>
+                                                    <%= moment(data[i].thoigiantao).format('DD-MM-YYYY HH:mm') %>
+                                                        <!-- <%=data[i].thoigiantao%>26/10/2023 22:11 -->
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center list-user-action">
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top"
+                                                            title="" data-original-title="Xóa"
+                                                            href="/admin/binhluan/xoabinhluan/<%=data[i].id%>"><i
+                                                                class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

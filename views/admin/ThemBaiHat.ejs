@@ -1,0 +1,83 @@
+<%- include("../Header.ejs") %>
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="iq-card">
+                        <div class="iq-card-header d-flex justify-content-between">
+                            <div class="iq-header-title">
+                                <h4 class="card-title">Thêm bài hát mới</h4>
+                            </div>
+                        </div>
+                        <div class="iq-card-body">
+                            <form action="/admin/baihat/thembaihat" method="POST" enctype="multipart/form-data">
+                                <div style="text-align: center;" class="form-group">
+
+                                    <div class="add-img-user profile-img-edit">
+                                        <img class="profile-pic img-fluid" src="" alt="">
+                                        <div style="text-align: center;" class="p-image">
+                                            <a href="javascript:void();" class="upload-button btn iq-bg-primary">Tải
+                                                ảnh</a>
+                                            <input name="poster" class="file-upload" type="file" accept="image/*">
+                                        </div>
+                                    </div>
+
+                                    <div class="img-extension mt-3">
+                                        <div class="d-inline-block align-items-center">
+                                            <span>Định dạng hợp lệ: </span>
+                                            <a href="javascript:void();">.jpg</a>
+                                            <a href="javascript:void();">.png</a>
+                                            <a href="javascript:void();">.jpeg</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="nhac">Chọn file nhạc (.mp3):</label>
+                                    <input type="file" name="nhac" accept=".mp3" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tên bài hát:</label>
+                                    <input name="tenbh" type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Thể loại:</label>
+                                    <select required name="id_tl" class="form-control" id="exampleFormControlSelect1">
+                                        <option selected="" disabled="">Chọn thể loại</option>
+                                        <% for (var i=0; i < data[0].length; i++) { %>
+                                            <option value="<%= data[0][i].id %>">
+                                                <%= data[0][i].theloai %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Ca sĩ:</label>
+                                    <select required name="id_cs" class="form-control" id="exampleFormControlSelect1">
+                                        <option selected="" disabled="">Chọn ca sĩ</option>
+                                        <% for (var i=0; i < data[1].length; i++) { %>
+                                            <option value="<%= data[1][i].id %>">
+                                                <%= data[1][i].tencs %>
+                                            </option>
+                                            <% } %>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mô tả:</label>
+                                    <textarea name="mota" class="form-control" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"
+                                    onclick="this.disabled=true;this.form.submit();">Thêm mới</button>
+                                <button type="reset" class="btn btn-danger">Clear</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Wrapper END -->
+    <%- include("../Footer.ejs") %>

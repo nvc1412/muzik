@@ -1,0 +1,369 @@
+<!-- Footer -->
+<script>
+    let track_list = [];
+</script>
+<% for (var i=0; i < list_bh.length; i++) { %>
+    <script>
+        track_list.push({
+            name: "<%=list_bh[i].tenbh%>",
+            artist: "<%=list_bh[i].tencs%>",
+            image: "<%= list_bh[i].poster %>",
+            path: "/music/<%=list_bh[i].nhac%>",
+        })
+    </script>
+    <% } %>
+        <script>
+            if (localStorage.getItem("track_list")) {
+                track_list = JSON.parse(localStorage.getItem("track_list") || "[]");
+            } else {
+                localStorage.setItem("track_list", JSON.stringify(track_list));
+            }
+        </script>
+
+        <footer class="iq-footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="player row">
+                            <audio hidden id="audio-player">
+                                <source src="/music/<%=list_bh[0].nhac%>" type="audio/mpeg">
+                            </audio>
+                            <div class="details col-6 col-sm-4 col-md-4 col-lg-4">
+                                <div class="now-playing">PLAYING 1 OF 3</div>
+                                <div class="track-art"><img class="track-art-img" style="width: 100%;"
+                                        src="<%= list_bh[0].poster %>" alt=""></div>
+                                <div>
+                                    <div class="track-name">
+                                        <%= list_bh[0].tenbh %>
+                                    </div>
+                                    <div class="track-artist">
+                                        <%= list_bh[0].tencs %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider_container slider_music col-sm-5 col-md-4 col-lg-4">
+                                <div class="current-time">00:00</div>
+                                <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
+                                <div class="total-duration">00:00</div>
+                            </div>
+                            <div class="buttons col-6  col-sm-3 col-md-2  col-lg-2">
+                                <div class="prev-track" onclick="prevTrack()"><i class="fa fa-step-backward fa-2x"></i>
+                                </div>
+                                <div class="playpause-track" onclick="playpauseTrack()"><i
+                                        class="fa fa-play-circle fa-3x"></i>
+                                </div>
+                                <div class="next-track" onclick="nextTrack()"><i class="fa fa-step-forward fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="slider_container sound col-sm-6 col-md-2  col-lg-2">
+                                <i class="fa fa-volume-down"></i>
+                                <input type="range" min="1" max="100" value="40" class="volume_slider"
+                                    onchange="setVolume()">
+                                <i class="fa fa-volume-up"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer END -->
+
+
+        <script>
+            let now_playing = document.querySelector(".now-playing");
+            let track_art = document.querySelector(".track-art");
+            let track_art_img = document.querySelector(".track-art-img");
+            let track_name = document.querySelector(".track-name");
+            let track_artist = document.querySelector(".track-artist");
+
+            let playpause_btn = document.querySelector(".playpause-track");
+            let next_btn = document.querySelector(".next-track");
+            let prev_btn = document.querySelector(".prev-track");
+
+            let seek_slider = document.querySelector(".seek_slider");
+            let volume_slider = document.querySelector(".volume_slider");
+            let curr_time = document.querySelector(".current-time");
+            let total_duration = document.querySelector(".total-duration");
+
+            let track_index = 0;
+            let isPlaying = false;
+            let updateTimer;
+
+            // Create new audio element
+            let curr_track = document.createElement("audio");
+            // console.log(curr_track);
+
+            // Define the tracks that have to be played
+            // let track_list = [
+            //     {
+            //         name: "Âm Thầm Bên Em",
+            //         artist: "Sơn Tùng M-TP",
+            //         image: "images/dashboard/audio/02.png",
+            //         path: "music/1700584213431-AmThamBenEm_Lofi.mp3",
+            //     },
+            //     {
+            //         name: "Hoa Cỏ lau",
+            //         artist: "Phong Max",
+            //         image: "images/dashboard/audio/01.png",
+            //         path: "music/1700584476625-HoaCoLau_Remix.mp3",
+            //     },
+            //     {
+            //         name: "Có Duyên Không Nợ",
+            //         artist: "Jessie J",
+            //         image: "images/dashboard/audio/03.png",
+            //         path: "music/1700584293271-CoDuyenKhongNo_Remix.mp3",
+            //     },
+            // ];
+
+            function loadTrack(track_index) {
+                clearInterval(updateTimer);
+                resetValues();
+                curr_track.src = track_list[track_index].path;
+                // console.log(track_list[track_index].path);
+                curr_track.load();
+
+                // track_art.style.backgroundImage =
+                //   "src(" + track_list[track_index].image + ")";
+                track_art_img.src = track_list[track_index].image;
+                track_name.textContent = track_list[track_index].name;
+                track_artist.textContent = track_list[track_index].artist;
+                now_playing.textContent =
+                    "PLAYING " + (track_index + 1) + " OF " + track_list.length;
+
+                updateTimer = setInterval(seekUpdate, 1000);
+                curr_track.addEventListener("ended", nextTrack);
+            }
+
+            function resetValues() {
+                curr_time.textContent = "00:00";
+                total_duration.textContent = "00:00";
+                seek_slider.value = 0;
+            }
+
+            // Load the first track in the tracklist
+            loadTrack(track_index);
+
+            function playpauseTrack() {
+                if (!isPlaying) playTrack();
+                else pauseTrack();
+            }
+
+            function playTrack() {
+                curr_track.play();
+                isPlaying = true;
+                playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-3x"></i>';
+            }
+
+            function pauseTrack() {
+                curr_track.pause();
+                isPlaying = false;
+                playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-3x"></i>';
+            }
+
+            function nextTrack() {
+                if (track_index < track_list.length - 1) track_index += 1;
+                else track_index = 0;
+                loadTrack(track_index);
+                playTrack();
+            }
+
+            function prevTrack() {
+                // console.log(track_index);
+
+                if (track_index > 0) track_index -= 1;
+                else track_index = track_list.length - 1;
+
+                loadTrack(track_index);
+                playTrack();
+            }
+
+            function seekTo() {
+                seekto = curr_track.duration * (seek_slider.value / 100);
+                curr_track.currentTime = seekto;
+            }
+
+            curr_track.volume = volume_slider.value / 100; // Set âm thanh ban đầu
+            function setVolume() {
+                curr_track.volume = volume_slider.value / 100;
+            }
+
+            function seekUpdate() {
+                let seekPosition = 0;
+
+                if (!isNaN(curr_track.duration)) {
+                    seekPosition = curr_track.currentTime * (100 / curr_track.duration);
+
+                    seek_slider.value = seekPosition;
+
+                    let currentMinutes = Math.floor(curr_track.currentTime / 60);
+                    let currentSeconds = Math.floor(
+                        curr_track.currentTime - currentMinutes * 60
+                    );
+                    let durationMinutes = Math.floor(curr_track.duration / 60);
+                    let durationSeconds = Math.floor(
+                        curr_track.duration - durationMinutes * 60
+                    );
+
+                    if (currentSeconds < 10) {
+                        currentSeconds = "0" + currentSeconds;
+                    }
+                    if (durationSeconds < 10) {
+                        durationSeconds = "0" + durationSeconds;
+                    }
+                    if (currentMinutes < 10) {
+                        currentMinutes = "0" + currentMinutes;
+                    }
+                    if (durationMinutes < 10) {
+                        durationMinutes = "0" + durationMinutes;
+                    }
+
+                    curr_time.textContent = currentMinutes + ":" + currentSeconds;
+                    total_duration.textContent = durationMinutes + ":" + durationSeconds;
+                }
+            }
+
+            // phát nhạc Bảng xếp hạng
+            function playBXH(x) {
+                localStorage.setItem("track_list", JSON.stringify(BXH_list));
+                track_index = +x; // Dùng + để chuyển chuỗi về số nguyên 
+                track_list = BXH_list;
+                loadTrack(track_index);
+                playTrack();
+            }
+
+            // phát nhạc Mới nhất
+            function playNEW(x) {
+                localStorage.setItem("track_list", JSON.stringify(NEW_list));
+                track_index = +x; // Dùng + để chuyển chuỗi về số nguyên 
+                track_list = NEW_list;
+                loadTrack(track_index);
+                playTrack();
+            }
+
+            // phát nhạc của ca sĩ
+            function playBHCS(x) {
+                localStorage.setItem("track_list", JSON.stringify(BHCS_list));
+                track_index = +x; // Dùng + để chuyển chuỗi về số nguyên 
+                track_list = BHCS_list;
+                loadTrack(track_index);
+                playTrack();
+            }
+
+            // phát nhạc của ca sĩ
+            function playPhoBien(x) {
+                localStorage.setItem("track_list", JSON.stringify(PhoBien_list));
+                track_index = +x; // Dùng + để chuyển chuỗi về số nguyên 
+                track_list = PhoBien_list;
+                loadTrack(track_index);
+                playTrack();
+            }
+
+        </script>
+
+        <script>
+            function downloadSong(songPath, songName) {
+                // Tạo một thẻ <a> để tải file
+                var downloadLink = document.createElement('a');
+                downloadLink.href = songPath;
+
+                // Đặt tên file được tải
+                downloadLink.download = songName + '.mp3'; // Bạn có thể đặt tên file tùy thuộc vào thông tin bài hát
+
+                // Thêm thẻ <a> vào trang và kích hoạt sự kiện nhấp chuột để bắt đầu tải
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                // Loại bỏ thẻ <a> sau khi tải xong
+                document.body.removeChild(downloadLink);
+            }
+
+            function changeLikeSong(idSong, idTK) {
+                $.ajax({
+                    url: "/trangchu/",
+                    method: "POST",
+                    data: { idSong: idSong, idTK: idTK }, // Gửi dữ liệu lên server
+                    success: function (response) {
+                        // Xử lý phản hồi từ server
+                        if (response.success) {
+                            // Nếu thành công, cập nhật màu sắc của biểu tượng thích
+                            var likeIcon = document.getElementById(`likeIcon_${idSong}`);
+                            if (response.isLiked) {
+                                likeIcon.style.color = 'red';
+                            } else {
+                                likeIcon.style.color = '';
+                            }
+                        } else {
+                            console.error("Error:", response.message);
+                        }
+                    },
+                    error: function (err) {
+                        console.error("Error:", err);
+                    }
+                });
+            }
+        </script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/jquery.dataTables.min.js"></script>
+        <script src="/js/dataTables.bootstrap4.min.js"></script>
+        <!-- Appear JavaScript -->
+        <script src="/js/jquery.appear.js"></script>
+        <!-- Countdown JavaScript -->
+        <script src="/js/countdown.min.js"></script>
+        <!-- Counterup JavaScript -->
+        <script src="/js/waypoints.min.js"></script>
+        <script src="/js/jquery.counterup.min.js"></script>
+        <!-- Wow JavaScript -->
+        <script src="/js/wow.min.js"></script>
+        <!-- Apexcharts JavaScript -->
+        <script src="/js/apexcharts.js"></script>
+        <!-- Slick JavaScript -->
+        <script src="/js/slick.min.js"></script>
+        <!-- Select2 JavaScript -->
+        <script src="/js/select2.min.js"></script>
+        <!-- Owl Carousel JavaScript -->
+        <script src="/js/owl.carousel.min.js"></script>
+        <!-- Magnific Popup JavaScript -->
+        <script src="/js/jquery.magnific-popup.min.js"></script>
+        <!-- Smooth Scrollbar JavaScript -->
+        <script src="/js/smooth-scrollbar.js"></script>
+        <!-- lottie JavaScript -->
+        <script src="/js/lottie.js"></script>
+        <!-- am core JavaScript -->
+        <script src="/js/core.js"></script>
+        <!-- am charts JavaScript -->
+        <script src="/js/charts.js"></script>
+        <!-- am animated JavaScript -->
+        <script src="/js/animated.js"></script>
+        <!-- am kelly JavaScript -->
+        <script src="/js/kelly.js"></script>
+        <!-- am maps JavaScript -->
+        <script src="/js/maps.js"></script>
+        <!-- am worldLow JavaScript -->
+        <script src="/js/worldLow.js"></script>
+        <!-- Raphael-min JavaScript -->
+        <script src="/js/raphael-min.js"></script>
+        <!-- Morris JavaScript -->
+        <script src="/js/morris.js"></script>
+        <!-- Morris min JavaScript -->
+        <script src="/js/morris.min.js"></script>
+        <!-- Flatpicker Js -->
+        <script src="/js/flatpickr.js"></script>
+        <!-- Style Customizer -->
+        <script src="/js/style-customizer.js"></script>
+        <!-- Chart Custom JavaScript -->
+        <script src="/js/chart-custom.js"></script>
+        <!-- Music js -->
+        <!-- <script src="/js/music-player.js"></script> -->
+        <!-- Music-player js -->
+        <!-- <script src="/js/music-player-dashboard.js"></script> -->
+        <!-- Custom JavaScript -->
+        <script src="/js/custom.js"></script>
+        <script src="/js/showhide-pass.js"></script>
+        </body>
+
+        </html>

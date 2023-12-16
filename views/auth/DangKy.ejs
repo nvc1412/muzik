@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>Muzik</title>
+   <!-- Favicon -->
+   <link rel="shortcut icon" href="/images/favicon.ico" />
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="/css/bootstrap.min.css">
+   <!-- Typography CSS -->
+   <link rel="stylesheet" href="/css/typography.css">
+   <!-- Style CSS -->
+   <link rel="stylesheet" href="/css/style.css">
+   <!-- Responsive CSS -->
+   <link rel="stylesheet" href="/css/responsive.css">
+</head>
+
+<body>
+   <!-- loader Start -->
+   <div id="loading">
+      <div id="loading-center">
+      </div>
+   </div>
+   <!-- loader END -->
+   <!-- Sign in Start -->
+   <section class="sign-in-page">
+      <div class="container">
+         <div class="row justify-content-center align-items-center height-self-center">
+            <div class="col-md-6 col-sm-12 col-12 align-self-center">
+               <div class="sign-user_card ">
+                  <div class="d-flex justify-content-center">
+                     <div class="sign-user_logo">
+                        <img src="/images/login/user.png" class=" img-fluid" alt="Logo">
+                     </div>
+                  </div>
+                  <div class="sign-in-page-data">
+                     <div class="sign-in-from w-100 m-auto pt-5">
+                        <h1 class="mb-3 text-center">Đăng ký</h1>
+                        <% if (typeof conflictError !="undefined" && conflictError) { %>
+                           <div class="text-danger text-center">
+                              <%= conflictError %>
+                           </div>
+                           <% } %>
+                              <form action="/dangky" method="POST" class="mt-4">
+                                 <div class="form-group">
+                                    <label for="exampleInputEmail2">Username</label>
+                                    <input required name="username" type="text" class="form-control mb-0"
+                                       id="exampleInputEmail2" placeholder="Nhập username" <% if (typeof username
+                                       !="undefined" && username) { %>
+                                    value="<%= username %>"<% } %> >
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleInputEmail3">Email</label>
+                                    <input <% if (typeof email !="undefined" && email) { %> value="<%= email %>"<% } %>
+                                          required name="email" type="email" class="form-control mb-0"
+                                          id="exampleInputEmail3"
+                                          placeholder="Nhập Email">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleInputPassword2">Mật khẩu</label>
+                                    <div style="display: flex; justify-content: flex-end; align-items: center;">
+                                       <input <% if (typeof password !="undefined" && password) { %> value="<%= password
+                                          %>"<% } %> required name="password" type="password" class="form-control mb-0"
+                                             id="exampleInputPassword2" placeholder=" Nhập mật khẩu">
+                                             <span style="position: absolute; margin-right: 20px;"
+                                                toggle="#exampleInputPassword2"
+                                                class="fa fa-eye toggle-password"></span>
+                                    </div>
+                                 </div>
+                                 <div class="d-inline-block w-100">
+                                    <div class="custom-control custom-checkbox d-inline-block mt-2">
+                                       <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                       <label class="custom-control-label" for="customCheck2">Tôi chấp nhận <a
+                                             href="#">Các
+                                             điều khoản và điều kiện</a></label>
+                                    </div>
+                                 </div>
+
+                                 <div class="sign-info mt-3">
+                                    <button type="submit" class="btn btn-primary mb-2">Đăng ký</button>
+                                    <span class="d-block line-height-2">Bạn đã có tài khoản ? <a href="/dangnhap">Đăng
+                                          nhập</a></span>
+                                 </div>
+                              </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- Sign in END -->
+
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="/js/jquery.min.js"></script>
+   <script src="/js/popper.min.js"></script>
+   <script src="/js/bootstrap.min.js"></script>
+   <!-- Appear JavaScript -->
+   <script src="/js/jquery.appear.js"></script>
+   <!-- Countdown JavaScript -->
+   <script src="/js/countdown.min.js"></script>
+   <!-- Counterup JavaScript -->
+   <script src="/js/waypoints.min.js"></script>
+   <script src="/js/jquery.counterup.min.js"></script>
+   <!-- Wow JavaScript -->
+   <script src="/js/wow.min.js"></script>
+
+   <!-- Apexcharts JavaScript -->
+   <script src="/js/apexcharts.js"></script>
+   <!-- Slick JavaScript -->
+   <script src="/js/slick.min.js"></script>
+   <!-- Select2 JavaScript -->
+   <script src="/js/select2.min.js"></script>
+   <!-- Owl Carousel JavaScript -->
+   <script src="/js/owl.carousel.min.js"></script>
+   <!-- Magnific Popup JavaScript -->
+   <script src="/js/jquery.magnific-popup.min.js"></script>
+   <!-- Smooth Scrollbar JavaScript -->
+   <script src="/js/smooth-scrollbar.js"></script>
+   <!-- Style Customizer -->
+   <script src="/js/style-customizer.js"></script>
+   <!-- Chart Custom JavaScript -->
+   <script src="/js/chart-custom.js"></script>
+   <!-- Custom JavaScript -->
+   <script src="/js/custom.js"></script>
+   <script src="/js/showhide-pass.js"></script>
+</body>
+
+</html>
